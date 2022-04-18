@@ -1,0 +1,27 @@
+
+9
+	README.md,8\e\8ec9a00bfd09b3190ac6b22251dbb1aa95a0579d
+a
+1app/Http/Controllers/GoogleAuthController.php.old,0\3\039ebf0a67743e1da488879e849c2611dd0611b5
+4
+.env,3\c\3c84dcdc6bbe3d7817c49dcdc327b926fea1808a
+C
+config/services.php,6\7\67cde7ebf0c82e44eedc43a9b83d4fa13c684078
+W
+'app/Classes/Responses/ValidResponse.php,0\9\09042c4c0b53b0e59ee64e81e3bb8cbdcfda5810
+Y
+)app/Classes/Responses/InvalidResponse.php,f\4\f423e1facc349241688bd1a525762608bda568d3
+R
+"app/Classes/Responses/Response.php,d\9\d9bad9aa7b2dd73f03a5d6f5ed0ae850f7ded871
+>
+routes/web.php,6\b\6b9a783d9b43fee50fd28f56dbd1856d2608f305
+l
+<database/migrations/2014_10_12_000000_create_users_table.php,d\e\de963aaada5c6577b654cfbdcf083dc355b1fa2b
+C
+app/Http/Kernel.php,4\0\405f423e61f666bcedb754ae8befdce9e746176e
+F
+app/Console/Kernel.php,7\c\7cc3fc289d685e79a47c29e2cb905c549625e76b
+}
+Mdatabase/migrations/2019_12_14_000001_create_personal_access_tokens_table.php,9\6\968051ae9d34530937eafe0273bc01c45c4755bd
+J
+app/Traits/IdGenerator.php,e\d\ed54095db7c50749382a81983f4ed1ae9be0cbe2
