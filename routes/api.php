@@ -4,6 +4,7 @@
 use App\Http\Controllers\AlbumController;
 use App\Http\Controllers\ArtistController;
 use App\Http\Controllers\GoogleAuthController;
+use App\Http\Controllers\SongController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -39,3 +40,9 @@ Route::get('/album', [AlbumController::class, 'getAlbum'])->middleware(['auth:sa
 Route::put('/album', [AlbumController::class, 'updateAlbum'])->middleware(['auth:sanctum', 'abilities:album']);
 Route::delete('/album', [AlbumController::class, 'deleteAlbum'])->middleware(['auth:sanctum', 'abilities:album']);
 Route::post('/album', [AlbumController::class, 'createAlbum'])->middleware(['auth:sanctum', 'abilities:album']);
+
+//Music
+Route::get('/music', [SongController::class, 'getSong'])->middleware(['auth:sanctum', 'abilities:music']);
+//Route::put('/music', [SongController::class, 'updateAlbum'])->middleware(['auth:sanctum', 'abilities:music']);
+Route::delete('/music', [SongController::class, 'deleteSong'])->middleware(['auth:sanctum', 'abilities:music']);
+Route::post('/music', [SongController::class, 'uploadSong'])->middleware(['auth:sanctum', 'abilities:music']);
