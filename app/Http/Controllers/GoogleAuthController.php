@@ -29,8 +29,9 @@ class GoogleAuthController extends Controller
         {
            $newUser = new User(['email' => $googleUser->email, 'name' => $googleUser->name, 'password' => Hash::make(random_bytes(24))]);
            $newUser->save();
-           Auth::login($newUser);
-           $response = new ValidResponse($newUser);
+           Auth::login($newUser, true);
+           $pat = $newUser->createToken(IdGenerator::requestTokenId(), ['artist', 'album', 'song'])->plainTextToken;
+           $response = new ValidResponse([$newUser, $pat]);
            return response()->json($response, 200);
         }
         Auth::login($user, true);

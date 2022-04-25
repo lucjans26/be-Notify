@@ -3,10 +3,6 @@
 	README.md,8\e\8ec9a00bfd09b3190ac6b22251dbb1aa95a0579d
 a
 1app/Http/Controllers/GoogleAuthController.php.old,0\3\039ebf0a67743e1da488879e849c2611dd0611b5
-4
-.env,3\c\3c84dcdc6bbe3d7817c49dcdc327b926fea1808a
-C
-config/services.php,6\7\67cde7ebf0c82e44eedc43a9b83d4fa13c684078
 W
 'app/Classes/Responses/ValidResponse.php,0\9\09042c4c0b53b0e59ee64e81e3bb8cbdcfda5810
 Y
@@ -25,3 +21,7 @@ F
 Mdatabase/migrations/2019_12_14_000001_create_personal_access_tokens_table.php,9\6\968051ae9d34530937eafe0273bc01c45c4755bd
 J
 app/Traits/IdGenerator.php,e\d\ed54095db7c50749382a81983f4ed1ae9be0cbe2
+m
+=database/migrations/2022_04_06_110947_create_artist_table.php,4\4\443dfbba5bb44804200a58eb415a49ebd1dae3ab
+C
+app/Models/User.php,a\9\a90f2e50cb06863b54effced365aa5f1fe7d9c88
