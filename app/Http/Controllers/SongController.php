@@ -7,6 +7,7 @@ use App\Classes\Responses\ValidResponse;
 use App\Models\Album;
 use App\Models\Song;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controller;
 
 class SongController extends Controller
 {

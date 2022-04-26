@@ -34,7 +34,7 @@ class GoogleAuthController extends Controller
            return response()->json($response, 200);
         }
         Auth::login($user, true);
-        $pat = $user->createToken(IdGenerator::requestTokenId(), ['artist', 'album', 'song'])->plainTextToken;
+        $pat = $user->createToken(IdGenerator::requestTokenId(), ['artist', 'album', 'song', 'rating'])->plainTextToken;
         $response = new ValidResponse([$user, $pat]);
         return response()->json($response, 200);
     }

@@ -5,8 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Song extends Model
+class Rating extends Model
 {
+    use HasFactory;
+
     /**
      * The attributes that are mass assignable.
      *
@@ -14,14 +16,12 @@ class Song extends Model
      */
     protected $fillable = [
         'id',
-        'name',
-        'album_id',
-        'genre',
-        'resourceLocation',
-        'releaseDate',
+        'value',
+        'song_id',
+        'user_id',
     ];
 
-    protected $table = "song";
+    protected $table = "album";
 
     /**
      * The attributes that should be hidden for serialization.
@@ -41,13 +41,13 @@ class Song extends Model
 
     ];
 
-    public function albums()
+    public function song()
     {
-        return $this->belongsTo(Album::class);
+        return $this->belongsTo(Song::class);
     }
 
-    public function ratings()
+    public function user()
     {
-        return $this->hasMany(Rating::class);
+        return $this->belongsTo(User::class);
     }
 }
