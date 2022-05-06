@@ -16,7 +16,7 @@ COPY docker/000-default.conf /etc/apache2/sites-available/000-default.conf
 COPY .env.example /var/www/html/.env
 
 RUN php artisan key:generate
-RUN php artisan config:cache
+#RUN php artisan config:cache
 RUN php artisan route:cache
 RUN chmod 777 -R /var/www/html/storage/
 RUN chown -R www-data:www-data /var/www/
