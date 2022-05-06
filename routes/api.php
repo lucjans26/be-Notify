@@ -22,6 +22,7 @@ use Illuminate\Support\Facades\Route;
 const ARTIST_ROUTE = '/artists';
 const ALBUM_ROUTE = '/album';
 const MUSIC_ROUTE = '/music';
+const RATING_ROUTE = '/rating';
 
 Route::group(['middleware' => ['web']], function () {
     Route::get('/auth/google/redirect', [GoogleAuthController::class, 'redirect']);
@@ -47,4 +48,5 @@ Route::get(MUSIC_ROUTE, [SongController::class, 'getSong'])->middleware(['auth:s
 Route::delete(MUSIC_ROUTE, [SongController::class, 'deleteSong'])->middleware(['auth:sanctum', 'abilities:music']);
 Route::post(MUSIC_ROUTE, [SongController::class, 'uploadSong'])->middleware(['auth:sanctum', 'abilities:music']);
 
-Route::post(MUSIC_ROUTE, [RatingController::class, 'like'])->middleware(['auth:sanctum', 'abilities:music']);
+Route::post(RATING_ROUTE, [RatingController::class, 'like'])->middleware(['auth:sanctum', 'abilities:music']);
+Route::get(RATING_ROUTE, [RatingController::class, 'getRating'])->middleware(['auth:sanctum', 'abilities:music']);
