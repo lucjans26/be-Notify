@@ -5,34 +5,40 @@ namespace App\Http\Controllers;
 use App\Classes\Responses\InvalidResponse;
 use App\Classes\Responses\ValidResponse;
 use App\Models\Album;
+use App\Models\Artist;
 use App\Models\Song;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Storage;
 
 class SongController extends Controller
 {
     public function uploadSong(Request $request)
     {
         $validateData = $request->validate([
-            'title' => 'required|string|min:3|max:255',
+            'title' => 'required|string|min:3|max:255|unique:song,name',
             'genre' => 'required|string',
             'album_id' => 'required',
-            //'song' => 'required|file|max:5000',
-            'song' => 'required|string',
+            'song' => 'required|file|max:5000',
         ]);
 
         $user = auth()->user();
         $album = Album::find($validateData['album_id']);
-        $artist = $album->artist;
+        $artist = Artist::find($album->artist_id);
 
         if ($user->id == $artist->user_id)
         {
-            $song = $artist->songs()->save([
-                'title' => $validateData['title'],
+            $path = Storage::putFile('songs', $request->file('song'));
+
+            $song = new Song([
+                'name' => $validateData['title'],
                 'genre' => $validateData['genre'],
                 'album_id' => $validateData['album_id'],
-                'song' => $validateData['song'],
+                'resourceLocation' => $path,
+                'releaseDate' => now(),
             ]);
+
+            $album->songs()->save($song);
 
             $response = new ValidResponse($song);
             return response()->json($response, 201);
@@ -51,10 +57,13 @@ class SongController extends Controller
 
         $user = auth()->user();
         $song = Song::find($validateData['song_id']);
-        $album = $song->album;
-        $artist = $album->artist;
+        $album = Album::find($song->album_id);
+        $artist = Artist::find($album->artist_id);
+
         if ($user->id == $artist->user_id)
         {
+            $song = Song::find($validateData['song_id']);
+            Storage::delete($song->resourceLocation);
             $song->delete();
             $response = new ValidResponse("song deleted");
             return response()->json($response, 200);
