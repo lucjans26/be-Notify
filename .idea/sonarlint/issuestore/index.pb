@@ -19,8 +19,6 @@ F
 app/Console/Kernel.php,7\c\7cc3fc289d685e79a47c29e2cb905c549625e76b
 }
 Mdatabase/migrations/2019_12_14_000001_create_personal_access_tokens_table.php,9\6\968051ae9d34530937eafe0273bc01c45c4755bd
-J
-app/Traits/IdGenerator.php,e\d\ed54095db7c50749382a81983f4ed1ae9be0cbe2
 m
 =database/migrations/2022_04_06_110947_create_artist_table.php,4\4\443dfbba5bb44804200a58eb415a49ebd1dae3ab
 C
