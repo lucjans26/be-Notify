@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Classes\Responses\InvalidResponse;
+use App\Classes\Responses\ResponseStrings;
 use App\Classes\Responses\ValidResponse;
 use App\Models\Artist;
 use Illuminate\Http\Request;
@@ -42,13 +43,13 @@ class ArtistController extends Controller
             if ($artist['user_id'] == $user['id'])
             {
                 $artist->delete();
-                $response = new ValidResponse("artist deleted");
+                $response = new ValidResponse(ResponseStrings::DELETED);
                 return response()->json($response, 200);
             }
             $response = new InvalidResponse("unauthorized");
             return response()->json($response, 401);
         }
-        $response = new InvalidResponse("not found");
+        $response = new InvalidResponse(ResponseStrings::NOT_FOUND);
         return response()->json($response, 404);
     }
 
@@ -68,7 +69,7 @@ class ArtistController extends Controller
             $artist->update(['name' => $validateData['artistName'], 'bio' => $validateData['bio']]);
             return response()->json($artist, 200);
         }
-        $response = new InvalidResponse("not found");
+        $response = new InvalidResponse(ResponseStrings::NOT_FOUND);
         return response()->json($response, 404);
     }
 
@@ -86,7 +87,7 @@ class ArtistController extends Controller
             {
                 return response()->json($artist, 200);
             }
-            $response = new InvalidResponse("not found");
+            $response = new InvalidResponse(ResponseStrings::NOT_FOUND);
             return response()->json($response, 404);
         } else
         {

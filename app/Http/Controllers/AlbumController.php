@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Classes\Responses\ResponseStrings;
 use App\Models\Album;
 use App\Models\Artist;
 use Carbon\Carbon;
@@ -38,7 +39,7 @@ class AlbumController extends Controller
             $response =  new ValidResponse($album);
             return response()->json($response, 200);
         }
-        $response = new InvalidResponse("not found");
+        $response = new InvalidResponse(ResponseStrings::NOT_FOUND);
         return response()->json($response, 404);
 
     }
@@ -57,7 +58,7 @@ class AlbumController extends Controller
             {
                 return response()->json($album, 200);
             }
-            $response = new InvalidResponse("not found");
+            $response = new InvalidResponse(ResponseStrings::NOT_FOUND);
             return response()->json($response, 404);
         }
         else
@@ -86,7 +87,7 @@ class AlbumController extends Controller
                 $artist->save();
                 return response()->json($artist, 200);
             }
-            $response = new InvalidResponse("not found");
+            $response = new InvalidResponse(ResponseStrings::NOT_FOUND);
             return response()->json($response, 404);
         }
 
@@ -103,10 +104,10 @@ class AlbumController extends Controller
         if ($album && $artist)
         {
             $album->delete();
-            $response = new ValidResponse(" album deleted");
+            $response = new ValidResponse(ResponseStrings::DELETED);
             return response()->json($response, 200);
         }
-        $response = new InvalidResponse("not found");
+        $response = new InvalidResponse(ResponseStrings::NOT_FOUND);
         return response()->json($response, 404);
     }
 }

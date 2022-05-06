@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Classes\Responses\InvalidResponse;
+use App\Classes\Responses\ResponseStrings;
 use App\Classes\Responses\ValidResponse;
 use App\Models\Album;
 use App\Models\Artist;
@@ -65,10 +66,10 @@ class SongController extends Controller
             $song = Song::find($validateData['song_id']);
             Storage::delete($song->resourceLocation);
             $song->delete();
-            $response = new ValidResponse("song deleted");
+            $response = new ValidResponse(ResponseStrings::DELETED);
             return response()->json($response, 200);
         }
-        $response = new InvalidResponse('unauthorized');
+        $response = new InvalidResponse(ResponseStrings::UNAUTHORIZED);
         return response()->json($response, 401);
     }
 
@@ -88,7 +89,7 @@ class SongController extends Controller
                 $response = new ValidResponse($songs);
                 return response()->json($response, 200);
             }
-            $response = new InvalidResponse("not found");
+            $response = new InvalidResponse(ResponseStrings::NOT_FOUND);
             return response()->json($response, 404);
         }
 
@@ -100,11 +101,11 @@ class SongController extends Controller
                 $response = new ValidResponse($song);
                 return response()->json($response, 200);
             }
-            $response = new InvalidResponse('not found');
+            $response = new InvalidResponse(ResponseStrings::NOT_FOUND);
             return response()->json($response, 404);
         }
 
-        $response = new InvalidResponse('invalid request');
+        $response = new InvalidResponse(ResponseStrings::INVALID);
         return response()->json($response, 400);
     }
 

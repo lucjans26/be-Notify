@@ -26,6 +26,6 @@ class RatingController extends Controller
                 ['value' => $validateData['type']]);
 
         $response = new ValidResponse($rating);
-        return response()->json($rating, 200);
+        return response()->json($response, 200);
     }
 }
