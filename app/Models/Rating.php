@@ -21,7 +21,7 @@ class Rating extends Model
         'user_id',
     ];
 
-    protected $table = "album";
+    protected $table = "rating";
 
     /**
      * The attributes that should be hidden for serialization.

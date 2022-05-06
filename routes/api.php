@@ -4,6 +4,7 @@
 use App\Http\Controllers\AlbumController;
 use App\Http\Controllers\ArtistController;
 use App\Http\Controllers\GoogleAuthController;
+use App\Http\Controllers\RatingController;
 use App\Http\Controllers\SongController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -46,3 +47,5 @@ Route::get('/music', [SongController::class, 'getSong'])->middleware(['auth:sanc
 //Route::put('/music', [SongController::class, 'updateAlbum'])->middleware(['auth:sanctum', 'abilities:music']);
 Route::delete('/music', [SongController::class, 'deleteSong'])->middleware(['auth:sanctum', 'abilities:music']);
 Route::post('/music', [SongController::class, 'uploadSong'])->middleware(['auth:sanctum', 'abilities:music']);
+
+Route::post('/rating', [RatingController::class, 'like'])->middleware(['auth:sanctum', 'abilities:music']);
