@@ -19,10 +19,9 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-
-//Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-//    return $request->user();
-//});
+const ARTIST_ROUTE = '/artists';
+const ALBUM_ROUTE = '/album';
+const MUSIC_ROUTE = '/music';
 
 Route::group(['middleware' => ['web']], function () {
     Route::get('/auth/google/redirect', [GoogleAuthController::class, 'redirect']);
@@ -31,21 +30,21 @@ Route::group(['middleware' => ['web']], function () {
 
 
 //Artist
-Route::get('/artist', [ArtistController::class, 'getArtist'])->middleware(['auth:sanctum', 'abilities:artist']);
-Route::put('/artist', [ArtistController::class, 'updateArtist'])->middleware(['auth:sanctum', 'abilities:artist']);
-Route::delete('/artist', [ArtistController::class, 'deleteArtist'])->middleware(['auth:sanctum', 'abilities:artist']);
-Route::post('/artist', [ArtistController::class, 'createArtist'])->middleware(['auth:sanctum', 'abilities:artist']);
+Route::get(ARTIST_ROUTE, [ArtistController::class, 'getArtist'])->middleware(['auth:sanctum', 'abilities:artist']);
+Route::put(ARTIST_ROUTE, [ArtistController::class, 'updateArtist'])->middleware(['auth:sanctum', 'abilities:artist']);
+Route::delete(ARTIST_ROUTE, [ArtistController::class, 'deleteArtist'])->middleware(['auth:sanctum', 'abilities:artist']);
+Route::post(ARTIST_ROUTE, [ArtistController::class, 'createArtist'])->middleware(['auth:sanctum', 'abilities:artist']);
 
 //Album
-Route::get('/album', [AlbumController::class, 'getAlbum'])->middleware(['auth:sanctum', 'abilities:album']);
-Route::put('/album', [AlbumController::class, 'updateAlbum'])->middleware(['auth:sanctum', 'abilities:album']);
-Route::delete('/album', [AlbumController::class, 'deleteAlbum'])->middleware(['auth:sanctum', 'abilities:album']);
-Route::post('/album', [AlbumController::class, 'createAlbum'])->middleware(['auth:sanctum', 'abilities:album']);
+Route::get(ALBUM_ROUTE, [AlbumController::class, 'getAlbum'])->middleware(['auth:sanctum', 'abilities:album']);
+Route::put(ALBUM_ROUTE, [AlbumController::class, 'updateAlbum'])->middleware(['auth:sanctum', 'abilities:album']);
+Route::delete(ALBUM_ROUTE, [AlbumController::class, 'deleteAlbum'])->middleware(['auth:sanctum', 'abilities:album']);
+Route::post(ALBUM_ROUTE, [AlbumController::class, 'createAlbum'])->middleware(['auth:sanctum', 'abilities:album']);
 
 //Music
-Route::get('/music', [SongController::class, 'getSong'])->middleware(['auth:sanctum', 'abilities:music']);
-//Route::put('/music', [SongController::class, 'updateAlbum'])->middleware(['auth:sanctum', 'abilities:music']);
-Route::delete('/music', [SongController::class, 'deleteSong'])->middleware(['auth:sanctum', 'abilities:music']);
-Route::post('/music', [SongController::class, 'uploadSong'])->middleware(['auth:sanctum', 'abilities:music']);
+Route::get(MUSIC_ROUTE, [SongController::class, 'getSong'])->middleware(['auth:sanctum', 'abilities:music']);
+//Route::put(ALBUM_ROUTE, [SongController::class, 'updateAlbum'])->middleware(['auth:sanctum', 'abilities:music']);
+Route::delete(MUSIC_ROUTE, [SongController::class, 'deleteSong'])->middleware(['auth:sanctum', 'abilities:music']);
+Route::post(MUSIC_ROUTE, [SongController::class, 'uploadSong'])->middleware(['auth:sanctum', 'abilities:music']);
 
-Route::post('/rating', [RatingController::class, 'like'])->middleware(['auth:sanctum', 'abilities:music']);
+Route::post(MUSIC_ROUTE, [RatingController::class, 'like'])->middleware(['auth:sanctum', 'abilities:music']);
