@@ -1,5 +1,5 @@
 on: push
-name: CI
+name: Test
 jobs:
   phpunit:
     runs-on: ubuntu-latest
@@ -22,13 +22,10 @@ jobs:
           fetch-depth: 1
 
       - name: Install composer dependencies
-        run: |
-          composer install --no-scripts
+        run: composer install --no-scripts
 
       - name: Prepare Laravel Application
-        run: |
-          cp .env.ci .env
-          php artisan key:generate
+        run: cp .env.ci .env && php artisan key:generate
 
       - name: Run Testsuite
         run: vendor/bin/phpunit tests/
