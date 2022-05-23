@@ -10,6 +10,7 @@ use App\Models\Song;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Http;
 
 class RatingController extends Controller
 {
@@ -22,12 +23,23 @@ class RatingController extends Controller
 
         $user = auth()->user();
 
-        $rating = Rating::updateOrCreate(
-                ['user_id' => $user->id, 'song_id' => $validateData['song_id']],
-                ['value' => $validateData['type']]);
+        $apiURL = '127.0.0.1:8081/api/rating';
+        $postInput = [
+            'song_id' => $validateData['song_id'],
+            'type' => $validateData['type'],
+            'user_id' => $user->id
+        ];
 
-        $response = new ValidResponse($rating);
-        return response()->json($response, 200);
+        $headers = [
+            'Accept' => 'application/json'
+        ];
+
+        $response = Http::withHeaders($headers)->post($apiURL, $postInput);
+
+        $statusCode = $response->status();
+        $responseBody = json_decode($response->getBody(), true);
+
+        return response()->json($responseBody, $statusCode);
     }
 
     public function getRating(Request $request)
@@ -37,18 +49,22 @@ class RatingController extends Controller
         ]);
 
         $user = auth()->user();
-        $song = Song::find($validateData['song_id']);
 
-        $ratings = $song->ratings()->get();
-        $likes = $ratings->where('value', 1)->count();
-        $dislikes = $ratings->where('value', -1)->count();
-        $userRating = $ratings->where('user_id', $user->id)->where('song_id', $validateData['song_id'])->first();
-        $response = new ValidResponse([
-            'likes' => $likes,
-            'dislikes' => $dislikes,
-            'user_rating' => $userRating['value'] ?? null
-        ]);
+        $apiURL = '127.0.0.1:8081/api/rating';
+        $params = [
+                'song_id' => $validateData['song_id'],
+                'user_id' => $user->id
+        ];
 
-        return response()->json($response, 200);
+        $headers = [
+            'Accept' => 'application/json'
+        ];
+
+        $response = Http::withHeaders($headers)->get($apiURL, $params);
+
+        $statusCode = $response->status();
+        $responseBody = json_decode($response->getBody(), true);
+
+        return response()->json($responseBody, $statusCode);
     }
 }
