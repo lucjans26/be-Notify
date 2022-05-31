@@ -50,3 +50,5 @@ Route::post(MUSIC_ROUTE, [SongController::class, 'uploadSong'])->middleware(['au
 
 Route::post(RATING_ROUTE, [RatingController::class, 'like'])->middleware(['auth:sanctum', 'abilities:music']);
 Route::get(RATING_ROUTE, [RatingController::class, 'getRating'])->middleware(['auth:sanctum', 'abilities:music']);
+Route::get(RATING_ROUTE . '/test', [RatingController::class, 'like']);
+
