@@ -13,6 +13,7 @@ COPY opcache.ini /usr/local/etc/php/conf.d/opcache.ini
 
 COPY --from=build /app /var/www/html
 COPY 000-default.conf /etc/apache2/sites-available/000-default.conf
+COPY ports.conf /etc/apache2/ports.conf
 COPY .env.example /var/www/html/.env
 
 RUN php artisan key:generate
