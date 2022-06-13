@@ -44,6 +44,7 @@ Route::post(ALBUM_ROUTE, [AlbumController::class, 'createAlbum'])->middleware(['
 
 //Music
 Route::get(MUSIC_ROUTE, [SongController::class, 'getSong'])->middleware(['auth:sanctum', 'abilities:music']);
+Route::get(MUSIC_ROUTE . "/search", [SongController::class, 'searchSong'])->middleware(['auth:sanctum', 'abilities:music']);
 //Route::put(ALBUM_ROUTE, [SongController::class, 'updateAlbum'])->middleware(['auth:sanctum', 'abilities:music']);
 Route::delete(MUSIC_ROUTE, [SongController::class, 'deleteSong'])->middleware(['auth:sanctum', 'abilities:music']);
 Route::post(MUSIC_ROUTE, [SongController::class, 'uploadSong'])->middleware(['auth:sanctum', 'abilities:music']);

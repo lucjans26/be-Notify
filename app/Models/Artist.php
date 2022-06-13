@@ -3,9 +3,11 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Laravel\Scout\Searchable;
 
 class Artist extends Model
 {
+    use Searchable;
     /**
      * The attributes that are mass assignable.
      *

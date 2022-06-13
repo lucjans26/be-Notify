@@ -7,10 +7,12 @@
     "require": {
         "php": "^8.0.2",
         "ext-curl": "*",
+        "algolia/scout-extended": "2.0",
         "guzzlehttp/guzzle": "^7.4",
         "laravel/framework": "^9.2",
         "laravel/sanctum": "^2.15",
         "laravel/socialite": "^5.5",
+        "laravel/telescope": "^4.9",
         "laravel/tinker": "^2.7",
         "php-amqplib/php-amqplib": "^3.2",
         "vladimir-yuldashev/laravel-queue-rabbitmq": "^12.0"

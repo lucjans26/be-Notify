@@ -1,8 +1,6 @@
 
 9
 	README.md,8\e\8ec9a00bfd09b3190ac6b22251dbb1aa95a0579d
-a
-1app/Http/Controllers/GoogleAuthController.php.old,0\3\039ebf0a67743e1da488879e849c2611dd0611b5
 W
 'app/Classes/Responses/ValidResponse.php,0\9\09042c4c0b53b0e59ee64e81e3bb8cbdcfda5810
 Y
@@ -11,8 +9,6 @@ R
 "app/Classes/Responses/Response.php,d\9\d9bad9aa7b2dd73f03a5d6f5ed0ae850f7ded871
 >
 routes/web.php,6\b\6b9a783d9b43fee50fd28f56dbd1856d2608f305
-l
-<database/migrations/2014_10_12_000000_create_users_table.php,d\e\de963aaada5c6577b654cfbdcf083dc355b1fa2b
 C
 app/Http/Kernel.php,4\0\405f423e61f666bcedb754ae8befdce9e746176e
 F

@@ -50,6 +50,18 @@ class SongController extends Controller
 
     }
 
+    public function searchSong(Request $request)
+    {
+        $validateData = $request->validate([
+            'query' => 'required|string',
+        ]);
+
+        $collection = Song::search($validateData['query'])->get();
+
+        $response = new ValidResponse($collection);
+        return response()->json($response, 200);
+    }
+
     public function deleteSong(Request $request)
     {
         $validateData = $request->validate([

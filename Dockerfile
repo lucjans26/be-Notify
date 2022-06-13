@@ -1,6 +1,6 @@
 FROM composer:latest as build
 COPY . /app/
-RUN composer install --prefer-dist --no-dev --optimize-autoloader --no-interaction
+RUN composer install --prefer-dist --no-dev --optimize-autoloader --no-interaction --ignore-platform-req=ext-sockets
 
 FROM php:8.1-apache-buster as production
 
@@ -19,6 +19,6 @@ COPY .env.example /var/www/html/.env
 RUN php artisan key:generate
 #RUN php artisan config:cache
 #RUN php artisan route:cache
-RUN chmod 777 -R /var/www/html/storage/
+RUN chmod 775 -R /var/www/html/storage/
 RUN chown -R www-data:www-data /var/www/
 RUN a2enmod rewrite
