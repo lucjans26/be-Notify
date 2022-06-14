@@ -36,7 +36,7 @@ class postRating implements ShouldQueue
      */
     public function handle()
     {
-        $apiURL = '127.0.0.1:8081/api/rating';
+        $apiURL = 'notify-rating/api/rating';
         $postInput = [
             'song_id' => $this->songId,
             'type' => $this->type,
