@@ -29,7 +29,7 @@ class SongController extends Controller
 
         if ($user->id == $artist->user_id)
         {
-            $path = Storage::putFile('songs', $request->file('song'));
+            $path = Storage::disk('azure-file-storage')->put("" ,$request->file('song'));
 
             $song = new Song([
                 'name' => $validateData['title'],

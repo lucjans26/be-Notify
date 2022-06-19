@@ -56,6 +56,25 @@ return [
             'throw' => false,
         ],
 
+        'azure-file-storage' => [
+            // The driver provided by this package.
+            'driver' => 'azure-file-storage',
+
+            // Account credentials.
+            'storageAccount' => env('AZURE_FILE_STORAGE_ACCOUNT'),
+            'storageAccessKey' => env('AZURE_FILE_STORAGE_ACCESS_KEY'),
+
+            // The file share.
+            // This driver supports one file share at a time (you cannot
+            // copy or move files between shares natively).
+            'fileShareName' => env('AZURE_FILE_STORAGE_SHARE_NAME'),
+
+            // Optional settings
+            'disableRecursiveDelete' => false,
+            'driverOptions' => [],
+            'root' => 'root/directory', // Without leading '/'
+        ],
+
     ],
 
     /*
