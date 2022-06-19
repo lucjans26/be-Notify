@@ -20,13 +20,12 @@ class SongController extends Controller
             'title' => 'required|string|min:3|max:255|unique:song,name',
             'genre' => 'required|string',
             'album_id' => 'required',
-            'song' => 'required|file|max:5000',
+            'song' => 'required|file|max:12000',
         ]);
 
         $user = auth()->user();
         $album = Album::find($validateData['album_id']);
         $artist = Artist::find($album->artist_id);
-
         if ($user->id == $artist->user_id)
         {
             $path = Storage::disk('azure-file-storage')->put("" ,$request->file('song'));
