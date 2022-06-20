@@ -8,6 +8,7 @@ use App\Classes\Responses\ValidResponse;
 use App\Models\Album;
 use App\Models\Artist;
 use App\Models\Song;
+use App\Models\SongEvent;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Storage;
@@ -40,13 +41,23 @@ class SongController extends Controller
 
             $album->songs()->save($song);
 
+            $songEvent = new SongEvent([
+                'song_id' => $song->id,
+                'action_type' => 'upload',
+                'name' => $song->name,
+                'album_id' => $song->album_id,
+                'genre' => $song->genre,
+                'resourceLocation' => $song->resourceLocation,
+                'releaseDate' => $song->releaseDate,
+            ]);
+            $songEvent->save();
+
             $response = new ValidResponse($song);
             return response()->json($response, 201);
         }
 
         $response = new InvalidResponse('unauthorized');
         return response()->json($response, 401);
-
     }
 
     public function searchSong(Request $request)
@@ -75,8 +86,18 @@ class SongController extends Controller
         if ($user->id == $artist->user_id)
         {
             $song = Song::find($validateData['song_id']);
-            Storage::delete($song->resourceLocation);
+            Storage::disk('azure-file-storage')->delete($song->resourceLocation);
             $song->delete();
+            $songEvent = new SongEvent([
+                'song_id' => $song->id,
+                'action_type' => 'delete',
+                'name' => $song->name,
+                'album_id' => $song->album_id,
+                'genre' => $song->genre,
+                'resourceLocation' => null,
+                'releaseDate' => $song->releaseDate,
+            ]);
+            $songEvent->save();
             $response = new ValidResponse(ResponseStrings::DELETED);
             return response()->json($response, 200);
         }
@@ -106,9 +127,12 @@ class SongController extends Controller
 
         else if (isset($validateData['song_id']))
         {
-            $song = Song::find($validateData['song_id']);
+            $songEvents = SongEvent::where('id', '=', $validateData['song_id'])->get();
+            $song = $songEvents->sortBy('updated_at')->first();
+
             if ($song)
             {
+                unset($song['action_type']);
                 $response = new ValidResponse($song);
                 return response()->json($response, 200);
             }

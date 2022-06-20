@@ -31,7 +31,7 @@ trait OathTrait
             return $pat;
         }
         Auth::login($user, true);
-        $pat = $user->createToken(IdGenerator::requestTokenId(), ['artist', 'album', 'song', 'rating'])->plainTextToken;
+        $pat = $user->createToken(IdGenerator::requestTokenId(), ['artist', 'album', 'music', 'rating'])->plainTextToken;
         return $pat;
     }
 
